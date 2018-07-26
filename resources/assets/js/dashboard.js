@@ -21,7 +21,10 @@ let DASHBOARD = {
     addEvents: function () {
         this.UIElements.$btn_menu_billing.click(function () {
             this.viewBilling();
-            console.log('funciona');
+        }.bind(this));
+
+        this.UIElements.$btn_menu_users.click(function () {
+            this.viewUsers();
         }.bind(this));
     },
 
@@ -40,7 +43,24 @@ let DASHBOARD = {
                 this.UIElements.$content_to_change.html(data.responseText);
             }.bind(this)
         })
-    }
+    },
+
+    //SOLICITA LA VISTA DE USUARIOS
+    viewUsers: function(){
+        let data = {
+            _token: this.UIElements.$csrf_token
+        }
+        
+        $.ajax({
+            type: 'POST', 
+            url: '/usersView', 
+            data: data, 
+            dataType: 'json', 
+            complete: function(data){
+                this.UIElements.$content_to_change.html(data.responseText);
+            }.bind(this)
+        })
+    }   
 }
 
 DASHBOARD.init();

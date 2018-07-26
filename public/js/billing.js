@@ -3,7 +3,6 @@ var BILLING = {
     //INICIALIZA EL OBJETO 
     init: function () {
         this.addEvents();
-        console.log('ejecutando');
     },
 
     //CACHEA TODOS LOS ELEMENTOS NECESARIOS
@@ -18,7 +17,12 @@ var BILLING = {
         $add_service_service_type: $('.add-service-service-type select'),
         $csrf_token : $('meta[name="csrf-token"]').attr('content'),
         $userId:$('#cssmenu').attr('data-user-id'),
-        $btn_bill: $('.btn-bill')
+        $btn_bill: $('.btn-bill'),
+
+        //INFO DE LA FACTURA GENERADA
+        $bill_date: $('.bill-date'),
+        $bill_id: $('.bill-id'),
+        $btn_see_bill: $('.btn-see-bill')
     },
 
     //AGREGA LOS EVENTOS A LOS ELEMENTOS CACHEADOS
@@ -29,6 +33,10 @@ var BILLING = {
 
         this.UIElements.$btn_bill.click(function(event){
             this.billFunction(event);
+        }.bind(this));
+
+        this.UIElements.$btn_see_bill.click(function(event){
+            this.seeBill(event);
         }.bind(this));
     },
 
@@ -60,11 +68,11 @@ var BILLING = {
             data: data, 
             dataType: 'json', 
             complete: function(data){
-                console.log('click');
                 this.UIElements.$btn_menu_billing[0].click();
             }.bind(this)
         })
     },
+    
     //REALIZA LA FACTURA DE UN ITEM PENDIENTE
     billFunction: function(event){
         let fac_id;
@@ -81,7 +89,33 @@ var BILLING = {
             data: data, 
             dataType: 'json', 
             complete: function(data){
-                console.log(data);
+                this.UIElements.$btn_menu_billing[0].click();
+
+                this.setInfoBillDetail();
+            }.bind(this)
+        })
+    },
+
+    setInfoBillDetail: function(){
+        this.UIElements.$bill_date.text('prueba');
+    },
+
+    seeBill: function(event){
+        let fac_id;
+        fac_id = $(event.currentTarget).attr('id-bill');
+
+        let data = {
+            fac_id:fac_id,
+            _token: this.UIElements.$csrf_token
+        }
+
+        $.ajax({
+            type: 'POST', 
+            url: '/getBill', 
+            data: data, 
+            dataType: 'json', 
+            complete: function(data){
+                console.log(data, 'data!!');
             }.bind(this)
         })
     }

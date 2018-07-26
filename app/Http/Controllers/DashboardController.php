@@ -12,7 +12,8 @@ class DashboardController extends Controller
 {   
     public function getBilling(Request $request){
         $services = DB::table('facturas')->where('fac_estado', 1)->get();
-        return view('billing', ['services' => $services])->render();
+        $bills = DB::table('facturas')->where('fac_estado', 0)->get();
+        return view('billing', ['services' => $services, 'bills' => $bills])->render();
     }
 
     public function createBilling(Request $request){
@@ -58,7 +59,7 @@ class DashboardController extends Controller
         //CALCULA EL MONTO A COBRAR
         $total = $totalH * $bill[0]->esp_precio;
 
-        DB::table('facturas')->where('fac_id', $fac_id)->update(['fac_total' => $total, 'fac_estado' => 0]);
+        DB::table('facturas')->where('fac_id', $fac_id)->update(['fac_total' => $total, 'fac_estado' => 0, 'fac_fecha_facturacion' => $current_time]);
 
         $info = DB::table('general_info')->get();
 
@@ -70,5 +71,29 @@ class DashboardController extends Controller
         $bill[0]->info_dir = $info[0]->info_dir;
 
         return $bill;
+    }
+
+    public function getBill(Request $request){
+        $fac_id = $request->fac_id;
+
+        $bill = DB::table('facturas')->join('tipo_espacios', 'facturas.esp_id', '=', 'tipo_espacios.esp_id')->select('facturas.*', 'tipo_espacios.*')->where([['fac_id', '=', $fac_id]])
+        ->get();
+
+        $info = DB::table('general_info')->get();
+
+        $bill[0]->info_id_tienda = $info[0]->info_id_tienda;
+        $bill[0]->info_name = $info[0]->info_nombre;
+        $bill[0]->info_telefono = $info[0]->info_telefono;
+        $bill[0]->info_dir = $info[0]->info_dir;
+
+        return $bill;
+    }
+    
+
+    ////PARA LOS USUARIOS
+
+    public function usersView(){
+        $users = DB::table('usuarios')->get();
+        return view('users', ['users' => $users])->render();
     }
 }

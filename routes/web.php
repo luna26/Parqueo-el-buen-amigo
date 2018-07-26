@@ -32,3 +32,7 @@ Route::post('/login', 'LoginController@login');
 Route::post('/billingView', 'DashboardController@getBilling');
 Route::post('/addBill', 'DashboardController@createBilling');
 Route::post('/bill', 'DashboardController@bill');
+Route::post('/getBill', 'DashboardController@getBill');
+
+//USUARIOS usersView
+Route::post('/usersView', 'DashboardController@usersView');

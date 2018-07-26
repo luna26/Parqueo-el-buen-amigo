@@ -10553,7 +10553,10 @@ var DASHBOARD = {
     addEvents: function addEvents() {
         this.UIElements.$btn_menu_billing.click(function () {
             this.viewBilling();
-            console.log('funciona');
+        }.bind(this));
+
+        this.UIElements.$btn_menu_users.click(function () {
+            this.viewUsers();
         }.bind(this));
     },
 
@@ -10566,6 +10569,23 @@ var DASHBOARD = {
         __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
             type: 'POST',
             url: '/billingView',
+            data: data,
+            dataType: 'json',
+            complete: function (data) {
+                this.UIElements.$content_to_change.html(data.responseText);
+            }.bind(this)
+        });
+    },
+
+    //SOLICITA LA VISTA DE USUARIOS
+    viewUsers: function viewUsers() {
+        var data = {
+            _token: this.UIElements.$csrf_token
+        };
+
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+            type: 'POST',
+            url: '/usersView',
             data: data,
             dataType: 'json',
             complete: function (data) {

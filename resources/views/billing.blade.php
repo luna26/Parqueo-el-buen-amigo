@@ -57,5 +57,29 @@
             @endforeach
         </table>
     </div>
+
+    <div class='list-services-actives'>
+        <div class='title-form-add-service'>
+            <p>Lista de servicio facturados</p>
+        </div>
+        <table style="width:100%">
+            <tr>
+                <th>ID Factura</th>
+                <th>Nombre</th> 
+                <th>Placa</th>
+                <th>Opciones</th>
+            </tr>
+            @foreach ($bills as $bill)
+            <tr>
+                <td>{{$bill->fac_id}}</td>
+                <td>{{$bill->fac_cliente_nombre}}</td> 
+                <td>{{$bill->fac_cliente_placa}}</td>
+                <td>
+                    <button class='btn btn-info btn-see-bill' id-bill={{$bill->fac_id}}>Ver Factura</button>
+                </td>
+            </tr>
+            @endforeach
+        </table>
+    </div>
 </div>
 <script src='js/billing.js'></script>
