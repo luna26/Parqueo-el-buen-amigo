@@ -12,5 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
+
+
+Route::get('dashboard',array('as'=>'dashboard',function()
+    {
+        return view('dashboard');
+     }
+));
+
+
+//SERVICIOS
+
+//*//LOGIN
+Route::post('/login', 'LoginController@login');
+
+//COBROS
+Route::post('/billingView', 'DashboardController@getBilling');
+Route::post('/addBill', 'DashboardController@createBilling');
+Route::post('/bill', 'DashboardController@bill');
