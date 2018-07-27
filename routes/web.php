@@ -36,3 +36,5 @@ Route::post('/getBill', 'DashboardController@getBill');
 
 //USUARIOS usersView
 Route::post('/usersView', 'DashboardController@usersView');
+Route::post('/deleteUser', 'DashboardController@deleteUser');
+Route::post('/createUser', 'DashboardController@createUser');

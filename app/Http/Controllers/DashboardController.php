@@ -90,10 +90,30 @@ class DashboardController extends Controller
     }
     
 
-    ////PARA LOS USUARIOS
+    ////FUNCIONES DE LOS USUARIOS
 
     public function usersView(){
         $users = DB::table('usuarios')->get();
-        return view('users', ['users' => $users])->render();
+        $roles = DB::table('roles')->get();
+        return view('users', ['users' => $users, 'roles' => $roles])->render();
+    }
+
+    public function deleteUser(Request $request){
+        $id_user = $request->id_user;
+        DB::table('usuarios')->where('usr_id', '=', $id_user)->delete();
+
+        return 'OK';
+    }
+
+    public function createUser(Request $request){
+        $email = $request->email;
+        $password = $request->password;
+        $role = $request->role;
+
+        DB::table('usuarios')->insert([
+            ['usr_email' => $email, 'usr_pass' => $password, 'role_id' => $role]
+        ]);
+
+        return 'OK';
     }
 }
