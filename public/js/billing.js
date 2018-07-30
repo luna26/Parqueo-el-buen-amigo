@@ -18,6 +18,7 @@ var BILLING = {
         $csrf_token : $('meta[name="csrf-token"]').attr('content'),
         $userId:$('#cssmenu').attr('data-user-id'),
         $btn_bill: $('.btn-bill'),
+        $overlay_bill : $('.overlay-bill'),
 
         //INFO DE LA FACTURA GENERADA
         $bill_date: $('.bill-date'),
@@ -90,19 +91,20 @@ var BILLING = {
             dataType: 'json', 
             complete: function(data){
                 this.UIElements.$btn_menu_billing[0].click();
-
-                this.setInfoBillDetail();
+                setTimeout(function(){
+                    this.showBill(fac_id);
+                }.bind(this), 2000);
             }.bind(this)
         })
     },
 
-    setInfoBillDetail: function(){
-        this.UIElements.$bill_date.text('prueba');
+    showBill: function(fac_id){
+        $( "button[id-bill-to-see='"+fac_id+"']" )[0].click();
     },
 
     seeBill: function(event){
         let fac_id;
-        fac_id = $(event.currentTarget).attr('id-bill');
+        fac_id = $(event.currentTarget).attr('id-bill-to-see');
 
         let data = {
             fac_id:fac_id,
@@ -115,7 +117,8 @@ var BILLING = {
             data: data, 
             dataType: 'json', 
             complete: function(data){
-                console.log(data, 'data!!');
+                this.UIElements.$overlay_bill.html(data.responseText);
+                this.UIElements.$overlay_bill.removeClass('hide');
             }.bind(this)
         })
     }

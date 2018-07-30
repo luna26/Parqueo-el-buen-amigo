@@ -1,7 +1,7 @@
 <div class='container-users'>
     <div class='list-services-actives'>
         <p>Agregar Usuario</p>
-        <div>
+        <div class='content-users'>
             <div>
                 <label>Correo</label>
                 <input class='user-email-create'/>

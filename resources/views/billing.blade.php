@@ -1,4 +1,5 @@
 <div class='container-billing'>
+    <div class='overlay-bill hide' />
     <div class='form-add-service'>
         <div class='title-form-add-service'>
             <p>Agregar Servicio</p>
@@ -30,6 +31,11 @@
                 <option value='2'>Aire Libre</option>
             </select>
         </div>
+        <div class='allow-spaces'>
+            <p>Espacios disponibles***</p>
+            <p>Espacios bajo techo {{$under_floor}}/25</p>
+            <p>Espacios al aire libre {{$air}}/50</p>
+        </div>
         <div>
             <button class='btn-add-service btn btn-info'>Agregar</button>
         </div>
@@ -43,6 +49,7 @@
                 <th>Placa</th>
                 <th>Nombre</th> 
                 <th>Hora de entrada</th>
+                <th>Tipo de servico</th>
                 <th>Opciones</th>
             </tr>
             @foreach ($services as $service)
@@ -50,6 +57,7 @@
                 <td>{{$service->fac_cliente_placa}}</td>
                 <td>{{$service->fac_cliente_nombre}}</td> 
                 <td>{{$service->fac_cliente_horas}}</td>
+                <td>{{$service->esp_desc}}</td>
                 <td>
                     <button class='btn btn-info btn-bill' id-bill={{$service->fac_id}}>Facturar</button>
                 </td>
@@ -75,7 +83,7 @@
                 <td>{{$bill->fac_cliente_nombre}}</td> 
                 <td>{{$bill->fac_cliente_placa}}</td>
                 <td>
-                    <button class='btn btn-info btn-see-bill' id-bill={{$bill->fac_id}}>Ver Factura</button>
+                    <button class='btn btn-info btn-see-bill' id-bill-to-see={{$bill->fac_id}}>Ver Factura</button>
                 </td>
             </tr>
             @endforeach

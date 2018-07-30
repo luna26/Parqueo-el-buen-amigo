@@ -11014,6 +11014,80 @@ select {
   margin-bottom: 15px;
 }
 
+.content-users input {
+  display: block;
+  width: 165px;
+}
+
+.content-users select {
+  margin-bottom: 50px;
+  padding: .5%;
+  width: 165px;
+}
+
+.overlay-bill {
+  position: absolute;
+  width: 65%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 10px;
+  border-color: black;
+  border: solid 1px;
+  padding: 10px;
+}
+
+.bill-content div {
+  display: inline-block;
+  width: 20%;
+  vertical-align: top;
+}
+
+.bill-content div p:first-child {
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.bill-content div p:last-child {
+  word-break: break-all;
+}
+
+.allow-spaces {
+  color: brown;
+}
+
+.btn-info-update {
+  margin-top: 25px;
+}
+
+.report-item {
+  display: inline-block;
+  width: 24%;
+  border: solid 1px;
+  vertical-align: top;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.report-item button {
+  margin-top: 20px;
+}
+
+.report-date-content {
+  margin-top: 40px;
+}
+
+.prices-content {
+  background-color: white;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 11px;
+  margin-top: 50px;
+}
+
 .hide {
   display: none;
 }

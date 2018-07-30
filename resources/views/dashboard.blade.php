@@ -6,6 +6,7 @@
             <li><a class='btn-menu-users' href='#'>Usuarios</a></li>
             <li><a class='btn-menu-prizes' href='#'>Precios</a></li>
             <li><a class='btn-menu-info' href='#'>Informacion General</a></li>
+            <li><a class='btn-menu-report' href='#'>Reportes</a></li>
         @endif 
         <li><a href='/'>Cerrar Sesion</a></li>
         </ul>

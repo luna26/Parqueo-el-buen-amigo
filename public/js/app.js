@@ -10529,9 +10529,10 @@ var DASHBOARD = {
     //CACHEA TODOS LOS ELEMENTOS NECESARIOS
     UIElements: {
         $btn_menu_users: __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.btn-menu-users'),
-        $btn_menu_prizes: __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.btn-menu-prizes'),
+        $btn_menu_prices: __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.btn-menu-prizes'),
         $btn_menu_info: __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.btn-menu-info'),
         $btn_menu_billing: __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.btn-menu-billing'),
+        $btn_menu_report: __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.btn-menu-report'),
         $content_to_change: __WEBPACK_IMPORTED_MODULE_0_jquery___default()('#content-app'),
         $csrf_token: __WEBPACK_IMPORTED_MODULE_0_jquery___default()('meta[name="csrf-token"]').attr('content')
     },
@@ -10544,6 +10545,18 @@ var DASHBOARD = {
 
         this.UIElements.$btn_menu_users.click(function () {
             this.viewUsers();
+        }.bind(this));
+
+        this.UIElements.$btn_menu_prices.click(function () {
+            this.pricesView();
+        }.bind(this));
+
+        this.UIElements.$btn_menu_info.click(function () {
+            this.infoView();
+        }.bind(this));
+
+        this.UIElements.$btn_menu_report.click(function () {
+            this.reportView();
         }.bind(this));
     },
 
@@ -10573,6 +10586,54 @@ var DASHBOARD = {
         __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
             type: 'POST',
             url: '/usersView',
+            data: data,
+            dataType: 'json',
+            complete: function (data) {
+                this.UIElements.$content_to_change.html(data.responseText);
+            }.bind(this)
+        });
+    },
+
+    pricesView: function pricesView() {
+        var data = {
+            _token: this.UIElements.$csrf_token
+        };
+
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+            type: 'POST',
+            url: '/getPrices',
+            data: data,
+            dataType: 'json',
+            complete: function (data) {
+                this.UIElements.$content_to_change.html(data.responseText);
+            }.bind(this)
+        });
+    },
+
+    infoView: function infoView() {
+        var data = {
+            _token: this.UIElements.$csrf_token
+        };
+
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+            type: 'POST',
+            url: '/viewInfo',
+            data: data,
+            dataType: 'json',
+            complete: function (data) {
+                this.UIElements.$content_to_change.html(data.responseText);
+            }.bind(this)
+        });
+    },
+
+    reportView: function reportView() {
+        var data = {
+            _token: this.UIElements.$csrf_token
+        };
+
+        __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.ajax({
+            type: 'POST',
+            url: '/viewReport',
             data: data,
             dataType: 'json',
             complete: function (data) {
