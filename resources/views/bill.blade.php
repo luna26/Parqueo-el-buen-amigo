@@ -57,7 +57,7 @@
     </div>
     <div>
         <button class='btn btn-info btn-bill-close'>Cerrar</button>
-        <button class='btn btn-warning'>Imprimir</button>
+        <a class='btn btn-warning' href="javascript:imprSelec('historial')">Imprimir</a>
     </div>
 </div>
 <script src='js/bill-item.js'></script>

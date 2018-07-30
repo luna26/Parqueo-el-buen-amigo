@@ -10449,6 +10449,15 @@ module.exports = __webpack_require__(5);
 __webpack_require__(3);
 __webpack_require__(4);
 
+function imprSelec(historial) {
+    var ficha = document.getElementById(historial);
+    var ventimp = window.open(' ', 'popimpr');
+    ventimp.document.write(ficha.innerHTML);
+    ventimp.document.close();
+    ventimp.print();
+    ventimp.close();
+}
+
 /***/ }),
 /* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
